@@ -47,3 +47,16 @@ Angular Architecture
 
 	-> Modules export and import code as and when required and finally render the view in the browser
 
+
+
+Ng Self Commands
+----------------
+	-> start : "ng serve",
+
+	-> build : "ng build --prod",
+
+	-> test  : "ng test",
+
+	-> lint  : "ng lint",
+
+	-> e2e   : "ng e2e"
