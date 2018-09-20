@@ -60,3 +60,37 @@ Ng Self Commands
 	-> lint  : "ng lint",
 
 	-> e2e   : "ng e2e"
+
+
+
+Angular - Highlights
+--------------------
+
+	- Angular is mobile oriented & better in performance.
+
+	- Angular provides more choice for languages.
+
+	- Angular implements web standards like components.
+
+	- Angular is not easy to setup as AngularJS.
+
+	- AngularJS controllers and $scope are gone.
+
+	- Different ways to define local variables.
+
+	- Structural directives syntax is changed.
+
+	- Angular uses camelCase syntax for built-in directives.
+
+	- Angular directly uses the valid HTML DOM element properties and events.
+
+	- One-way data binding directive replaced with [property].
+
+	- Two-way data binding: ng-model replaced with [(ngModel)]
+
+	- Way of Bootstrapping Angular Application is changed:
+
+	- Ways of Dependency Injection is Changed- syntax changed.
+
+	- Way of routing is Changed- syntax changed.
+
