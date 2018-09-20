@@ -94,3 +94,70 @@ Angular - Highlights
 
 	- Way of routing is Changed- syntax changed.
 
+
+
+Understanding the File Structure
+--------------------------------
+
+	- app/app.component.ts - this is where we define our root component
+
+	- app/app.module.ts - the entry Angular Module to be bootstrapped
+
+	- index.html - this is the page the component will be rendered in
+
+	- app/main.ts - is the glue that combines the component and page together
+
+
+	The bootstrap process loads 'main.ts' which is the main entry point of the application. The 'AppModule' operates as the root module of our application. The module is configured to use 'AppComponent' as the component to bootstrap, and will be rendered on any 'my-app' HTML element encountered.
+
+
+	Angular syntax
+	---------------
+
+		src/main.ts
+		-----------
+			import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+			import { AppModule } from './app/app.module';
+
+			platformBrowserDynamic().bootstrapModule(AppModule);
+
+
+		app.module.ts
+		-------------
+			import { NgModule }      from '@angular/core';
+			import { BrowserModule } from '@angular/platform-browser';
+			import { FormsModule } 	from '@angular/forms';
+
+
+			import { AppComponent }   from './app.component';
+			import { testComponent }   from './custom.component';
+			import { GreeterService } from './greeter.service';
+
+
+			@NgModule({
+				imports: [ BrowserModule , FormsModule ],
+				declarations: [ AppComponent, testComponent ],
+				providers: [GreeterService],
+				bootstrap: [ AppComponent ]
+			})
+
+			export class AppModule { }
+
+
+		app.component.ts
+		----------------
+			import { Component } from '@angular/core';
+
+			@Component({
+				selector: 'my-app',
+				template: `<myform>Loading...</myform>`
+			})
+
+			export class AppComponent { }
+
+
+		index.html (main)
+		----------
+			<body>
+				<my-app>Loading...</my-app>
+			</body>
