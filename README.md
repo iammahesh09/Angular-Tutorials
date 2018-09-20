@@ -27,3 +27,23 @@ Angular
 		- Components
 		- Directives
 		- templates
+
+
+
+
+
+Angular Architecture
+--------------------
+
+	-> Angular is completely based on modular programming, Code is divided in reusable components. 
+
+	-> Angular App - one or more modules
+
+	-> Module - each module one or more components and services
+
+	-> Components - component contains an HTML template and class to control the logic for that particular view
+
+	-> services - module can also have services which contains the "Business login" of application
+
+	-> Modules export and import code as and when required and finally render the view in the browser
+
