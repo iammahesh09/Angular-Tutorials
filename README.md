@@ -853,3 +853,67 @@ viewEncapsulation
 			encapsulation: ViewEncapsulation.Emulated
 		})
 
+
+
+One way Data Binding & Two way Data Binding in Angular
+------------------------------------------------------
+
+	One way Data Binding
+	--------------------
+		@Component({ 
+			selector: 'my-app', 
+			template: ` Name : <input [value]='username'> <br>
+			You entered : {{username}} `
+		})
+
+		export class AppComponent { 
+			username: string = 'Tom Jhon';
+		}
+
+		- [input [value]='username'] : Binds component class "username" property to the input element’s value property
+
+		- You entered : {{username}} : Interpolation displays the value we have in "username" property on the web page
+
+
+		At the moment when we change the value in the textbox, that changed value is not reflected in the browser. One way to achieve this is by binding to the input event of the input control as shown below.
+
+
+	Two way Data Binding
+	--------------------
+
+		Data binding is the synchronization of data between the model and view components.
+
+		Two-way data binding merges property and event binding in a single notation using the directive "ngModel"
+
+		<input type="text" [(ngModel)]="name">
+
+		<h1>{{name}}</h1>
+
+			Example
+			-------
+				Ex1: -	
+					<input [(ngModel)]="username">
+
+					<p>Hello {{username}}!</p>
+
+
+				Ex2: -	
+					<input [value]="username" (input)="username = $event.target.value">
+
+					<p>Hello {{username}}!</p>
+
+
+						->	[value]="username" - Binds the expression username to the input element’s value property
+
+						-> (input)="expression" - Is a declarative way of binding an expression to the input element’s input event (yes there’s such event)
+
+						-> username = $event.target.value - The expression that gets executed when the input event is fired
+
+						-> $event - Is an expression exposed in event bindings by Angular, which has the value of the event’s payload
+
+
+				Ex3: -	
+					<input [ngModel]="username" (ngModelChange)="username = $event">
+
+					<p>Hello {{username}}!</p>
+
