@@ -2176,3 +2176,121 @@ Angular - Route Parameters
 	REST stands for Representational State Transfer. It's a style of web architecture. Basically, REST is just a set of agreements and constraints on how components should work together.
 
 	When APIs use REST architecture, they are called REST APIs
+
+
+
+Observable and Rxjs
+-------------------
+	Step-1) Make 'HTTP' get call from EmpService
+
+	Step-2)Receive the observable and map it (to JSON Format)
+
+	Step-3) Subscrible to the 'obsevable' form the Components that require this data
+
+	Step-4) we are going to assign that receive the data to a local variable in the view so that we can display it to the user
+
+	Rxjs - Reactive Extensions for JavaScript
+
+	this is an external library that we use to work with observables and this is not the react from Facebook, that's a completely different thing, this is just an external library to work with observables
+
+
+
+	Step-1) Make 'HTTP' get call from EmpService
+	--------------------------------------------
+
+		-> first import 'HttpModule' in 'app.module.js'
+
+			import { HttpModule } from '@angular/http';
+
+
+		-> second import "Http" in 'serviceComponent.ts'
+
+			import { Injectable } from '@angular/core';					
+			import {Http} from '@angular.http';
+
+			@Injectable()
+
+			export class dataService{
+				private _url:string = "apiDatabase/data.json";
+
+				constructor(private _http:Http){}
+
+				myService(){
+					return this._http.get(this._url);
+				}
+			}
+
+		-> Third create 'JSON' file
+
+			[
+				{"id":100,"name":"Mahesh","desc":"UI"},
+				{"id":200,"name":"Suresh","desc":"UX"},
+				{"id":300,"name":"Rajech","desc":"Java"},
+				{"id":400,"name":"Mukesh","desc":"PHP"}
+			];
+
+
+	Step-2) Receive the observable and map it (to JSON Format)
+	----------------------------------------------------------
+
+		-> import "Response" from Http
+		-> import the 'map' operator from Rxjs 
+
+			import 'rxjs/add/operator/map';
+
+		-> call map operator (useing arrow function and arguments)
+
+
+			import { Injectable } from '@angular/core';
+			import {Http, Response } from '@angular.http';
+			import 'rxjs/add/operator/map';
+
+			@Injectable()
+
+
+			export class dataService{
+
+				private _url:string = "apiDatabase/data.json";
+				constructor(private _http:Http){}
+
+				myService(){
+					return this._http.get(this._url)
+						.map((dataResponse:Response)=> dataResponse.json());
+				}
+			}
+
+
+	Step-3 and  Step-4
+	------------------
+	-> Subscrible to the 'obsevable' form the Components
+
+
+		import { Component, OnInit } from '@angular/core';
+		import { dataService } from './app.services';
+
+		@Component({
+			selector: 'app-root',
+			templateUrl:'./app.component.html',
+			styleUrls:['./app.component.css'],
+			providers:[dataService]
+		})
+
+		export class AppComponent implements OnInit {
+
+			empDatalist:any;
+
+			constructor(private _empService:dataService){}
+
+			ngOnInit(){
+				this._empService.myService().subscribe(
+						resEmpData => this.empDatalist = resEmpData
+					);
+			}
+
+		}
+
+
+	<ul *ngFor="let emp of empDatalist">
+		<li>{{emp.id}} {{emp.name}} {{emp.desc}}</li>
+	</ul>
+
