@@ -1580,3 +1580,156 @@ Custom pipes
 What is an AsyncPipe in Angular?
 --------------------------------
 	When an observable or promise returns something, we use a temporary property to hold the content. Later, we bind the same content to the template. With the usage of AsyncPipe, the promise or observable can be directly used in a template and a temporary property is not required. 
+
+
+
+
+Angular - Forms
+---------------
+	Angular comes with three different ways of building forms in our applications. 
+
+		1. Template Driven Forms
+		2. Model Driven Forms
+		3. Model Driven Forms- FormBuilder
+
+	
+	Template Driven Forms
+	---------------------
+
+		In order to activate the new APIs we need to import Angular’s "FormsModule" into our application module.
+
+		app.module.ts
+		-------------
+			import { NgModule } from '@Angular/core';
+			import { BrowserModule } from '@Angular/platform-browser';
+
+			//Set FormModele 
+			import { FormsModule } from '@Angular/forms'; 
+
+			@NgModule({
+				imports: [BrowserModule, FormsModule],
+				declarations: [AppComponent],
+				bootstrap: [AppComponent]
+			})
+			
+			export AppModule {}
+
+
+		app.component.ts
+		----------------
+			import {Component} from '@Angular/core';
+
+			@Component({
+				selector:"my-div",
+				templateUrl:'app/view/form.html',
+			})
+
+			export class testComponent{
+
+				formSubmit(value:any){
+					console.log(value)
+				}
+
+			}
+
+
+	ngForm Directive
+	----------------
+		from.html
+		---------
+			<div class="container">
+
+				<h1>Template Driven Forms</h1>
+
+				<form #dataFrom="ngForm" (ngSubmit)="formSubmit(dataFrom.value)">
+
+					<div class="from-group">
+						<label>First Name</label>
+						<input type="text" class="form-control" name="firstname" [(ngModel)]="firstname">
+					</div>
+
+					<div class="from-group">
+						<label>Last Name</label>
+						<input type="text" class="form-control" name="lastname" [(ngModel)]="lastname">
+					</div>
+
+					<p>Your Name : <b>{{firstname}} {{lastname}}</b></p>
+
+					<div class="from-group">
+						<label>Email</label>
+						<input type="email" class="form-control" name="email" ngModel>
+					</div>
+
+					<div ngModelGroup="Address">
+						<div class="from-group">
+							<label>street</label>
+							<input type="text" class="form-control" name="street" ngModel>
+						</div>
+						<div class="from-group">
+							<label>City</label>
+							<input type="text" class="form-control" name="city" ngModel>
+						</div>
+						<div class="from-group">
+							<label>Pincode</label>
+							<input type="text" class="form-control" name="pincode" ngModel>
+						</div>			
+					</div>
+
+					<div class="from-group">
+						<button type="submit" class="btn btn-primary">Submit</button>	
+					</div>
+
+				</form>
+
+			</div>
+
+
+
+		Template Driven Forms Validation
+		--------------------------------
+
+			State 							Class if true 		Class if flase	
+			-------------------------		-------------		--------------
+			Control has been visited		ng-touched 			ng-untouched
+
+			Control value has changed		ng-dirty 			ng-pristine
+
+			Control value is valid 			ng-valid 			ng-invalid
+
+
+
+		Validation Example
+		------------------
+
+		<div class="from-group">
+
+			<label>First Name</label>
+
+			<input type="text" required #firstnameRef="ngModel" class="form-control" name="firstname" ngModel>
+			
+			<div [hidden]="firstnameRef.valid || firstnameRef.pristine" class="alert alert-danger">Enter Your Name</div>
+
+		</div>
+
+		minlength
+		---------
+			<div class="from-group">
+				
+				<label>First Name</label>
+
+				<input type="text" required minlength="3" [(ngModel)]="firstnameRef" #firstnameRef="ngModel" class="form-control" name="firstnameRef" >
+
+				<div *ngIf="firstnameRef.errors && (firstnameRef.dirty || firstnameRef.touched)" class="alert alert-danger">
+
+					<div [hidden]="!firstnameRef.errors.required">Enter Your Name</div>
+
+					<div [hidden]="!firstnameRef.errors.minlength">Please enter minmum 4 length charater</div>				
+				</div>
+
+			</div>
+
+
+		Submitt button Valid Form
+		-------------------------
+			<button [disabled]="!dataFrom.form.valid" type="submit" class="btn btn-primary">Submit</button>
+
