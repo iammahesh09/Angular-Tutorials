@@ -2360,3 +2360,21 @@ Angular Services
 
 		}
 
+
+
+
+Angular - Promise vs Observable
+-------------------------------
+
+	1. 	Observable is a more powerful way of handling HTTP asynchronous requests. Whereas, 
+	A promise handles a single event when an asynchronous operation completes or fails.
+
+	2. An observable is like a stream which allows passing zero or more events where the callback is called for each event. Whereas, A promise eventually calls the success or failed callback even when you don’t need the notification or the result it provides anymore.
+
+	3. Observable works with multiple values for a particular time. Whereas, Promises works with and even returns a single value at a time.
+
+	4. Observables can be canceled. Whereas, Promises cannot be canceled.
+
+	5. Observable supports map, filter, reduce and similar operators. Whereas, Promises have more readable codes with try/catch and async/await.
+
+	6. In observable, one operator ‘retry’ can be used to retry whenever needed. Whereas, Promises cannot be retried. A promise should have access to the original function that returned the promise in order to have a retry capability.
