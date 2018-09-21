@@ -917,3 +917,283 @@ One way Data Binding & Two way Data Binding in Angular
 
 					<p>Hello {{username}}!</p>
 
+
+
+
+Angular - Data Binding
+----------------------
+	We use Data Binding to help co-ordinate communication between a component and it’s Template
+
+
+	Interpolation (OR) Expression
+	-----------------------------	
+		Angular uses double-curly braces {{ }} to represent interpolation. Interpolation executes expression. Suppose we want to do mathematical calculation, we can perform it as follows within HTML template.
+
+
+		- interpolation is a special syntax that angular converts into a property binding
+
+		- To concatenate string we must use interpolation instead of property binding 
+			
+			<img src="{{imgPath}}">	
+
+
+	Property Binding
+	----------------
+		Property binding is performed as one-way from data source to view target. especially in case of styles and attribute bindings. It has a syntax []
+
+		In property binding there is source and target.
+
+		Using square brackets []
+		Using bind- Keyword		
+
+		Ex:-
+			<img src="{{ Logo }}">
+			<img [src]="Logo">
+			<img bind-src="Logo">
+
+		For the example we can define it as [href]="website.url". 
+		Here 'href' is a 'target' that is a property of anchor tag and 'source' is a component property i.e website.url. 
+
+		There are three types of property binding. 
+			1. Element property 
+			2. Directive property 
+			3. Component property 
+
+
+			Component property binding is performed as below.
+
+				<my-msg  prefixMsg= "Website name is" [siteName] = "website.name"> </my-msg> 
+
+
+			Element property binding is performed as below.
+
+				<a [href]="website.url" [textContent]="website.name"> </a> 
+
+
+			Directive property binding is performed as below.
+
+				<p [ngClass]="'one two'"> Angular Property Binding Example </p> 
+
+
+			- Angular data binding sanitizes malicious content before displaying it
+
+
+	Angular Event Binding
+	----------------------
+
+		Event binding is a data binding from an event to a component, The events are standard browser events such as Click, DoubleClick etc.
+
+
+		For example the following is the syntax for binding to the click event of a button. Within parentheses on the left of the equal sign we have the target event, (click) in this case and on the right we have the template statement. In this case the onClick() method of the component class is called when the click event occurs.
+
+			<button (click)="isValid=true">True</button>  
+
+		canonical form And event binding using on- keyword is achieved as follows.
+
+			<button on-click="isValid=true">True</button>  
+
+		Call component method on event binding.
+
+			<input (change) = "changeText($event.target.value)">  
+
+
+		very time we click the button, 'Button Clicked' message is logged to the console. You can see this message under the Console tab, in the browser developer tools.
+
+		Another Example : Initially when the page loads we want to display only the First Name and Last of Employee. We also want to display "Show Details" button.
+
+		When we click "Show Details" button, we want to display "Gender" and "Age" as well. The text on the button should be changed to "Hide Details". When we click "Hide Details" button, "Gender" and "Age" should be hidden and the button text should be changed to "Show Details".
+
+		To achieve this we will make use of event binding in Angular. We will also make use of one of the structural directives "ngIf" in angular.
+
+		Code in employee.component.ts : Notice we have introduced "showDetails" boolean property. The default value is false, so when the page first loads, we will have "Gender" and "Age" hidden. We also have a method, toggleDetails(), which toggles the value of showDetails. 
+
+
+		@Component({ 
+			selector: 'my-employee', 
+			templateUrl: 'app/employee/employee.user.html', 
+			styleUrls: ['app/employee/employee.user.css']
+		})
+
+		export class EmployeeComponent { 
+
+			columnSpan: number = 2; 
+
+			firstName: string = 'Tom'; 
+
+			lastName: string = 'Hopkins'; 
+
+			gender: string = 'Male'; 
+
+			age: number = 20; 
+
+			showDetails: boolean = false;
+
+			toggleDetails(): void { 
+				this.showDetails = !this.showDetails; 
+			}
+		}
+
+
+		<table class="table table-striped">
+			<thead class="table-inverse">
+				<tr>
+					<th>FirstName</th>
+					<th>LastName</th>
+					<th *ngIf="showDetails">Gender</th>
+					<th *ngIf="showDetails">Age</th>
+					<th></th>
+				</tr>
+			</thead>	
+			<tbody>
+				<tr *ngFor="let mobile of mobiles; let i='index'">
+					<td>{{firstName}}</td>
+					<td>{{lastName}}</td>
+					<td *ngIf="showDetails">{{gender}}</td>
+					<td *ngIf="showDetails">{{age}}</td>
+				</tr>
+			</tbody>	
+		</table>
+
+		<button (click)="toggleDetails()">{{showDetails? 'Hide':'Show'}} Details</button>
+
+		
+	Explain $event in Angular
+	-------------------------
+	 
+		- In Angular $event is a reserved keyword that represents the data emitted by an event (event data).
+		- It is commonly used as a parameter for event based methods.
+
+
+
+	Angular Attribute binding
+	-------------------------
+
+		Interpolation and Propertybinding that deal with binding Component class properties to HTML element properties and not Attributes. 
+
+		However, in some situations we want to be able to bind to HTML element attributes. 
+
+		For example, colspan and aria attributes does not have corresponding DOM properties. So in this case we want to be able to bind to HTML element attributes. 
+
+
+			<th attr.colspan="{{colSpan}}"></th> //interpolation
+
+			<th [attr.colspan]="colSpan"></th>  //Property binding
+
+
+	
+	Angular - Class Binding
+	---------------------------
+		We can add and remove CSS class names from the HTML element class attribute using CSS class binding. CSS class binding is same as property binding. But we need to add a prefix "class." with CSS class name in class binding. The CSS class added by class binding will override the existing CSS class properties if any property will be common. CSS class binding removes CSS class when expression returns false and adds it when expression returns true.
+
+		To add or remove more than one CSS class dynamically we should use NgClass directive. 
+
+		CSS file
+		--------
+
+			.text-green{
+				color: green;
+				font-size: 30px;
+			}
+			.text-danger{
+				color: red;
+				background-color: cyan;
+				font-family: cursive;
+			} 
+
+
+		Html Page
+		---------
+			<div class="text-green">Hello Wordl!</div>
+
+			<div [class.text-green]="isReq">Hello Wordl!</div>
+
+			<div class="text-green" [class.text-danger]="isOptional('yes')">Hello Wordl!</div>
+
+			<div class="text-green" [class.text-danger]="isOptional('no')">Hello Wordl!</div>
+
+			<div class="text-green text-danger" [class.text-danger]="isOptional('no')">Hello Wordl!</div> 
+
+
+		style.ts
+		--------
+			isReq = true;
+
+			isOptional(data) {
+				if (data == 'yes') {
+					return true;
+				} else {
+					return false;
+				}
+			}
+
+
+	Style binding in Angular
+	--------------------------
+
+
+		The following example sets a single style (font-weight). If the property 'isBold' is true, then font-weight style is set to bold else normal.
+
+			import { Component } from '@angular/core';
+
+			@Component({ 
+				selector: 'my-app', 
+				template: ` <button style='color:red' [style.font-weight]="isBold ? 'bold' : 'normal'">My Button </button> `
+			})
+
+			export class AppComponent { 
+				isBold: boolean = true;
+			}
+
+
+		style property name can be written in either dash-case or camelCase. For example, font-weight style can also be written using camel case - fontWeight.
+
+		Some styles like font-size have a unit extension. To set font-size in pixels use the following syntax. This example sets font-size to 30 pixels.
+
+			import { Component } from '@angular/core';
+
+			@Component({ 
+				selector: 'my-app', 
+				template: ` <button style='color:red' [style.font-size.px]="fontSize">My Button </button> `
+			})
+
+			export class AppComponent { 
+				fontSize: number = 30;
+			}
+
+
+		To set multiple inline styles use NgStyle directive
+
+			1. Notice the color style is added using the style attribute
+			2. ngStyle is binded to addStyles() method of the AppComponent class
+			3. addStyles() method returns an object with 2 key/value pairs. The key is a style name, and the value is a value for the respective style property or an expression that returns the style value.
+			4. let is a new type of variable declaration in JavaScript.
+			5. let is similar to var in some respects but allows us to avoid some of the common “gotchas” that we run into when using var. 
+			6. The differences between let and var are beyond the scope of this video. For our example, var also works fine.
+			7. As TypeScript is a superset of JavaScript, it supports let
+
+
+			import { Component } from '@angular/core';
+
+			@Component({ 
+				selector: 'my-app', 
+				template: ` <button style='color:red' [ngStyle]="addStyles()">My Button</button> `
+			})
+
+			export class AppComponent { 
+				
+				isBold: boolean = true; 
+				
+				fontSize: number = 30; isItalic: boolean = true; 
+				
+				addStyles(){ 
+				
+				let styles = { 
+					'font-weight': this.isBold ? 'bold' : 'normal', 
+					'font-style': this.isItalic ? 'italic' : 'normal', 
+					'font-size.px': this.fontSize 
+				}; 
+
+				return styles; 
+				}
+			}
+
