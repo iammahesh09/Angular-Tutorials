@@ -1973,3 +1973,84 @@ Angular - Template Reference Variable
 
 			Here myVar will be a template reference variable.
 
+
+
+
+Angular - Routing and Navigation - (Optional)
+--------------------------------
+	The Router module handles the navigation & Routing in Angular. 
+
+	The Routing allows you to move from one part of the application to another part or one View to another View.  
+
+
+	RouterModule
+	------------
+		RouterModule is a separate module in angular that provides required services and directives to use routing and navigation in angular application.
+
+
+		Step 1: 
+		-------
+			Set base tag in index.html
+
+			<base href="/">
+
+		Step 2
+		------
+			Configure routes
+
+
+			Example-1
+			---------
+			Router imports in main 'app.module.ts'
+
+				import { RouterModule } from '@angular/router'
+
+
+				import { AppComponent } from './app.component';
+				import { homeComponent } from './home/app.home';
+				import { aboutComponent } from './about/app.about';
+
+
+				@NgModule({
+					declarations: [AppComponent, homeComponent, aboutComponent],
+					
+					imports: [
+						BrowserModule,
+						RouterModule.forRoot([
+							{path:'Home', component:homeComponent},
+							{path:'About', component:aboutComponent}
+						])
+					],
+
+					providers: [],
+
+					bootstrap: [AppComponent]
+				})
+
+				export class AppModule { }
+
+
+			app.component.ts
+			---------------
+				import { Component } from '@angular/core';
+
+				@Component({
+					selector: 'app-root',
+					templateUrl:'./app.component.html',
+					styleUrls:['./app.component.css'],
+				})
+
+				export class AppComponent {}
+
+
+			app.component.html
+			---------------
+				<nav>
+					<ul>
+						<li><a routerLink="/Home" routerLinkActive="active">Home</a></li>
+						<li><a routerLink="/About" routerLinkActive="active">About</a></li>
+					</ul>
+
+					<router-outlet></router-outlet>
+				</nav>
+
