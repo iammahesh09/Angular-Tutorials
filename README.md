@@ -2401,3 +2401,19 @@ HTTP, Observable and Rxjs
 	----
 		- Reacive Extensions for JavaScript
 		- External library to work with Observable 
+
+
+
+
+CanActivate and CanActivateChild
+--------------------------------
+
+	-> In the Angular application in which authentication and authorization is required to navigate a route
+
+	-> CanActivate and CanActivateChild. Both API works in the same way.
+
+	->. CanActivate and CanActivateChild are interfaces and have methods canActivate() and canActivateChild() respectively. These methods return "Boolean" value.
+
+	-> CanActivate is used for "authentication" and CanActivateChild is used for "authorization"
+
+	-> Angular Route interface provides canActivate and canActivateChild properties to configure service class which is implementing CanActivate and CanActivateChild interfaces. 
