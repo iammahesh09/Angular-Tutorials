@@ -2162,3 +2162,17 @@ Angular - Routing and Routes (First Preferred)
 				<router-outlet></router-outlet>
 
 			</nav>
+
+
+
+Angular - Route Parameters
+--------------------------
+	API stands for Application Program Interface. Simply put, an API is an interface for coders to communicate with applications.
+
+	API acts just like a middleware. When we send requests to an API, it checks the requests. If the requests are allowed, data will be returned. Proper responses are also returned to let us know the result of our requests.
+
+	Using APIs, we can effectively create a backend service that supports many types of applications. Developers can change the look and feel of their apps frequently without worrying about breaking the apps.
+
+	REST stands for Representational State Transfer. It's a style of web architecture. Basically, REST is just a set of agreements and constraints on how components should work together.
+
+	When APIs use REST architecture, they are called REST APIs
