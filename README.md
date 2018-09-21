@@ -1940,3 +1940,14 @@ Angular - Components: Inputs and Outputs
 					}
 				}
 
+
+
+Custom Event Binding using @Output and EventEmitter
+---------------------------------------------------
+
+	EventEmitter
+	------------
+		its only purpose is to emit events in components
+
+		EventEmitter is really an Angular abstraction, and should be used pretty much only for emitting custom Events in components.
+
