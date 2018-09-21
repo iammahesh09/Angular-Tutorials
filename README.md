@@ -1498,3 +1498,79 @@ Angular - Pipes "|"
 				public num =2.569;
 			}
 
+
+
+Custom pipes
+------------
+
+	- Create custom pipe.
+	- Transforming the value. 
+	- Override transform() method. 
+	- Returning the new value 
+	- Accepting arguments 
+
+	(OR)
+
+
+	Step 1 : 
+	--------
+		To achieve this let's create a custom pipe called employeeTitlePipe. Right click on the "employee" folder and add a new TypeScript file. Name it "employeeTitle.pipe.ts". Copy and paste the following code.
+
+		Code Explanation : 
+		----------------
+		
+		1. Import Pipe decorator and PipeTransform interface from Angular core
+
+		2. Notice "EmployeeTitlePipe" class is decorated with Pipe decorator to make it an Angular pipe
+
+		3. name property of the pipe decorator is set to employeeTitle. This name can then be used on any HTML page where you want this pipe functionality.
+
+		4. EmployeeTitlePipe class implements the PipeTransform interface. This interface has one method transform() which needs to be implemented.
+
+		5. Notice the transform method has 2 parameters. value parameter will receive the name of the employee and gender parameter receives the gender of the employee. The method returns a string i.e Mr. or Miss. prefixed to the name of the employee depending on their gender.
+
+
+		import {Pipe, PipeTransform } from '@angular/core'
+
+		@Pipe({
+			name:'PriceDiff',
+		})
+
+		export class mobilePipe implements PipeTransform{
+			
+			priceChange(value: string, gender: string): string { 
+			
+				if (gender.toLowerCase() == "male") {
+
+					return "Mr." + value; 
+
+				} else {
+				
+					return "Miss." + value; 
+				}
+			}
+		}
+
+
+	Step 2 : 
+	--------
+		Register "EmployeeTitlePipe" in the angular module where we need it. In our case we need it in the root module. So in app.module.ts file, import the EmployeeTitlePipe and include it in the "declarations" array of NgModule decorator
+
+		import { EmployeeTitlePipe } from './employee/employeeTitle.pipe'
+
+		@NgModule({ 
+			imports: [BrowserModule], 
+			declarations: [AppComponent, EmployeeComponent, EmployeeListComponent, EmployeeTitlePipe], 
+			bootstrap: [AppComponent]
+		})
+		
+		export class AppModule { }
+
+	Step 3 : 
+	--------
+		In "employeeList.component.html" use the "EmployeeTitlePipe" as shown below. Notice we are passing employee gender as an argument for the gender parameter of our custom pipe. Employee name gets passed automatically.
+
+
+	Step 4 :
+	-------
+		employee.name | employeeTitle:employee.gender
