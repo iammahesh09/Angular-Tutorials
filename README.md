@@ -2054,3 +2054,111 @@ Angular - Routing and Navigation - (Optional)
 					<router-outlet></router-outlet>
 				</nav>
 
+
+
+
+Angular - Routing and Routes (First Preferred)
+----------------------------------------------
+	
+	The Angular Router enables navigation from one view to the next as users perform application tasks.
+
+	RouterModule and Routes
+	-----------------------
+		- RouterModule is a separate module in angular that provides required services and directives to use routing and navigation in angular application. 
+
+		- Routes defines and array of roots that map a path to a component. Paths are configured in module to make available it globally. 
+
+	
+	To use RouterModule and Routes in module,
+
+
+		Step-1
+		------
+			Set base tag in index.html
+
+				<base href="/"> 
+
+
+		Step-2
+		-------
+			- import RouterModule and Routes
+
+			import { RouterModule, Routes } from '@angular/router'; 
+
+		Step-3 
+		------
+			Create Array of Routes :
+
+			- Mapping a Route to a Component 
+
+				{ path: 'manage-book', component: ManageBookComponent } 
+
+			- Configure Parameters
+
+				{ path: 'update-book/:id', component: UpdateBookComponent } 
+
+			- Redirect to a URL
+
+				{ path: '', redirectTo: '/manage-book ', pathMatch: 'full' }  
+
+			- Handling "Page Not Found"
+
+				{ path: '**', component: PageNotFoundComponent } 
+
+			Example
+			-------
+				const routes: Routes = [
+					{ path: 'home', component: homeComponent },
+					{ path: 'about/:id', component: aboutComponent }, 
+					{ path: '', redirectTo: '/conatct ', pathMatch: 'full' },
+					{ path: '**', component: PageNotFoundComponent }
+				] 
+
+		Step-4
+		------
+			Using RouterModule.forRoot() 
+
+			Now we need to import RouterModule.forRoot(routes) using imports metadata of @NgModule. Here argument routes is our constant that we have defined above as array of Routes to map path with component.
+
+			imports: [ RouterModule.forRoot(routes) ] 
+
+
+
+
+	Example-1
+	---------
+		'app.route.ts'
+		-------------
+			import { NgModule } from '@angular/core';
+			import { RouterModule, Routes } from '@angular/router';
+
+			import { homeComponent } from './home/app.home';
+			import { aboutComponent } from './about/app.about';
+
+			const routes: Routes =[
+				{path:'Home', component:homeComponent},
+				{path:'About', component:aboutComponent},
+			];
+
+			@NgModule({
+				imports: [ RouterModule.forRoot(routes)],
+				exports: [ RouterModule ]
+			})
+
+			export class AppRouterModule{}
+
+			export const routerComponets = [homeComponent, aboutComponent ]
+
+
+		app.component.html
+		---------------
+			<nav>
+
+				<ul>
+					<li><a routerLink="/Home" routerLinkActive="active">Home</a></li>
+					<li><a routerLink="/About" routerLinkActive="active">About</a></li>
+				</ul>
+
+				<router-outlet></router-outlet>
+
+			</nav>
