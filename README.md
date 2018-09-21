@@ -1763,7 +1763,7 @@ ReactiveForms Validation At The Angular 6
 			<div class="form-group">
 				<button (click)="addMember(name.value, age.value)" [disabled]="memberFrm.pristine || memberFrm.invalid" class="btn btn-success">Add</button>
 			</div>
-			
+
 		</form>
 
 
@@ -1803,4 +1803,140 @@ ReactiveForms Validation At The Angular 6
 			ngOnInit(){}
 
 		}
+
+
+
+Angular - Components: Inputs and Outputs
+----------------------------------------
+
+	Use property binding and the '@Input' decorator to pass data into a component, and '@Output' and 'EventEmitter' to pass data out and bind to an event.
+
+		- @Input is attached to a property that can be used for property binding - [ex_property]
+
+		- @Output is attached to a property that can be used for event binding - (ex_event)
+
+	@Input
+	------
+
+		@Input decorator Communicate from Parent Component to Child Component. This is one way communication from parent to child. The component property should be annotated with @Input decorator to act as input property. A component can receive a value from another component using component property binding. Now we will see how to use @Input. It can be annotated at any type of property such as number, string, array or user defined class. To use alias for the binding property name we need to assign an alias name as @Input(alias). 
+
+		Find the use of @Input with string data type.
+
+		Example
+		-------
+			Parent Component
+			----------------
+				import {Component} from '@angular/core';
+
+				@Component({
+					selector: 'parentComponent',
+					template: ` 
+
+						<div class="jumbotron">
+							<h1>Hello! {{name}}</h1>
+							<input type="text" class="col-sm-3 form-control" [(ngModel)]="bindParentData">
+
+							// <input type="text" class="col-sm-3 form-control" #bindParentData (keyup)="0">
+						</div>							
+
+						<ChildComponent [bindParentToChild]="bindParentData">Loading... </ChildComponent>
+					`,
+				})
+				export class AppComponent {
+
+					public name = "Parent Component";
+
+				}
+
+
+			Child Component
+			---------------
+				import {Component, Input} from '@angular/core';
+
+				@Component({
+					selector:'ChildComponent',
+
+					template:`<p>{{bindParentToChild}}</p>`,
+
+					inputs:['bindAppToSec'],
+				})
+
+				export class maheshComponent{
+
+					// @Input() bindParentToChild;  //this another option
+
+					// @Input('bindParentToChild') ParentToChild ;  //this another option
+				}
+
+
+
+	@Output
+	-------
+		@Output decorator Communicate from Child Component to Parent Component.
+
+		@Output decorator binds a property of a component to send data from one component (child component) to calling component (parent component). This is one way communication from child to parent component. @Output binds a property of the type of angular EventEmitter class. This property name becomes custom event name for calling component. @Output decorator can also alias the property name as @Output(alias) and now this alias name will be used in custom event binding in calling component. 
+
+		Example
+		-------
+			Parent Component
+			----------------
+				import {Component} from '@angular/core';
+
+				@Component({
+
+					selector: 'parentComponent',
+
+					template: ` 	
+						<div class="jumbotron">
+
+						<h1>Hello! {{name}}</h1>								
+
+						<p>{{bindChildData}}</p>
+
+						</div>							
+
+						<ChildComponent (bindChildEvent)="bindChildData=$event">Loading ... </ChildComponent>
+					`,
+
+				})
+
+				export class AppComponent {
+
+					public name = "Parent Component";
+
+				}
+
+
+			Child Component
+			---------------
+				import {Component, EventEmitter, Output} from '@angular/core';
+
+				@Component({
+
+					selector:'ChildComponent',
+
+					template:`
+						<div class="jumbotron br-black">
+						<h1>Hello! {{name}}</h1>
+
+						<input type="text" #bindChildData (keyup)="onChange(bindChildData.value)">
+
+						</div>
+					`,
+
+					outputs:['bindChildEvent']
+				})
+
+				export class maheshComponent{
+
+					public name = "Child Component";
+
+					// @Output() bindChildEvent;  //this another option
+
+					bindChildEvent = new EventEmitter<string>();
+
+					onChange(data:string){
+						this.bindChildEvent.emit(data)
+					}
+				}
 
