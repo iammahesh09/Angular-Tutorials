@@ -1574,3 +1574,9 @@ Custom pipes
 	Step 4 :
 	-------
 		employee.name | employeeTitle:employee.gender
+
+
+
+What is an AsyncPipe in Angular?
+--------------------------------
+	When an observable or promise returns something, we use a temporary property to hold the content. Later, we bind the same content to the template. With the usage of AsyncPipe, the promise or observable can be directly used in a template and a temporary property is not required. 
