@@ -2425,3 +2425,49 @@ Explain Authentication and Authorization.
 	- Authentication: The user login credentials are passed to an authenticate API (on the server). On the server side validation of the credentials happens and a JSON Web Token (JWT) is returned. JWT is a JSON object that has some information or attributes about the current user.  Once the JWT is given to the client, the client or the user will be identified with that JWT.
 
 	-Authorization: After logging in successfully, the authenticated or genuine user does not have access to everything. The user is not authorized to access someone else’s data,  he/she is authorized to access some data.
+
+
+
+lazy loading in Angular
+-----------------------
+
+	- Lazy loading is a module which is used to decrease the start-up time. 
+
+	- When lazy is used, then our system application does not need to load everything at once. 
+
+	- It only needs to load what the user expects to see when the application first loads. 
+
+	- The modules which are lazily loaded will only be loaded when the user navigates to their routes. 
+
+	-Lazy loading improves the performance of our system applications. 
+
+	- It keeps the initial payload small and these smaller payloads lead to faster download speeds. It helps in lowering the resource cost especially on mobile networks. 
+
+	- If a user doesn’t visit a section of the application, they won’t ever download those resources. 
+
+	- The concept of lazy loading in angular requires us to format the application in a certain way. 
+	
+	- All the assets that are to be lazy loaded should be added to its own module. 
+
+	- Lazy loading is setup in the main routing file. 
+
+	- Lazy loading overcomes the problem of slow loading of applications in their own way which hence improves the loading time of the application.
+
+	
+	Lazy loading can be done only in four steps: –
+
+	- Update your route file
+	- Install angular-router-loader and add the loader to your webpack configuration file.
+	- Define the lazy routes
+	- Import the routes to the module.	
+
+
+	
+	With out lazy loading
+	---------------------
+		By defulat, Angular load all the components any time we launch the application, all components are inportes from app.module.ts and are added into declarations array, this means that angular will load all of this components in the declarations array when stating up the application
+
+	With lazy loading 
+	-----------------
+		Lazy Loading loads only what we need to use when frst starting up the application. If user navigate to a new page, then the component for that paqe will load immediately. However, this does not mean that it loads the component all the time we change page. In fact, it loads only for the first visit page, it will not load when we revisit that page again.
+
