@@ -791,3 +791,35 @@ Angular - Directives
 
 				<p appRedBlack>items works!</p>
 
+
+
+
+Dependency injection
+--------------------
+
+	Dependency injection is a coding pattern in which a class receives its dependencies form external sources rather than creating them itself
+
+	Dependency injection is the ability to add the functionality of components at runtime.
+
+
+	implement dependency injection
+	------------------------------
+
+	Step 1
+	------
+		Create a separate class which has the injectable decorator. The injectable decorator allows the functionality of this class to be injected and used in any Angular JS module.
+
+		@Injectable() 
+		export class classname {  
+
+		}
+
+
+	Step 2
+	------
+		Next in your appComponent module or the module in which you want to use the service, you need to define it as a provider in the @Component decorator.
+
+		@Component ({  
+			providers : [classname] 
+		})
+
