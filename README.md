@@ -2471,3 +2471,56 @@ lazy loading in Angular
 	-----------------
 		Lazy Loading loads only what we need to use when frst starting up the application. If user navigate to a new page, then the component for that paqe will load immediately. However, this does not mean that it loads the component all the time we change page. In fact, it loads only for the first visit page, it will not load when we revisit that page again.
 
+
+
+
+
+Angular Lifecycle Hooks
+-----------------------
+	OnChange()  -  OnInit()  -  DoCheck()  -  AfterContentInit()  -  AfterContentChecked()  -  AfterViewInit()  -  AfterViewChecked()  -  OnDestroy()
+
+
+	Component Life Cycle Hook
+	-------------------------
+	The life cycle hooks are the methods that angular invokes on directives and components as it creates, changes, and destroys them. Using life-cycle hooks we can fine-tune the behaviour of our components during creation, update, and destruction.
+
+		1. Component Life Cycle
+		2. OnInit & OnDestroy
+		3. Onchanges
+		4. DoCheck
+
+
+		ngOnChanges: 
+		-----------
+			Responds when angular (re)sets its data-bound property which receives the current and previous object values.
+
+		ngOnInit: 
+		--------
+			Initializes the component/directive after first ngOnChange triggers. This is most frequently used method to retrieve the data for the template from a back-end service.
+		
+		ngDoCheck: 
+		----------
+			Detect and act upon changes occuring outside Angular context. It is called when every change detection run.
+		
+		ngOnDestroy: 
+		------------
+			Cleanup just before Angular destroys the directive/component. Unsubscribe observables and detach event handlers to avoid memory leaks.
+		
+
+		Component-specific hooks:
+
+			ngAfterContentInit: 
+			-------------------
+				Component content has been initialized
+
+			ngAfterContentChecked: 
+			---------------------
+				After Angular checks the bindings of the external content that it projected     into its view.
+
+			ngAfterViewInit: 
+			----------------
+				After Angular creates the component’s view.
+
+			ngAfterViewChecked: 
+			-------------------
+				After Angular checks the bindings of the component’s view.
