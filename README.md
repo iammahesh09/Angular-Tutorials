@@ -1297,3 +1297,79 @@ Conditional (ternary) Operator
 
 		}
 
+
+
+@ViewChild and @ViewChildren ( Accessing Child Component Classes )
+------------------------------------------------------------------
+	
+	The @ViewChild and @ViewChildren decorators provide access to the class of child component from the containing component.
+
+
+	@ViewChild
+	----------
+		The @ViewChild is a decorator function that takes the name of a component class as its input and finds its selector in the template of the containing component to bind to. @ViewChild can also be passed a template reference variable.
+
+		For example, we bind the class AlertComponent to its selector <app-alert> and assign it to the property alert. This allows us to gain access to class methods, like show().
+
+
+		import { Component, ViewChild } from '@angular/core';
+		import { AlertComponent } from './alert.component';
+
+		@Component({
+			selector: 'app-root',
+			template: `
+				<app-alert>My alert</app-alert>
+				<button (click)="showAlert()">Show Alert</button>
+			`
+		})
+		
+		export class AppComponent {
+
+			@ViewChild(AlertComponent) alert: AlertComponent;
+
+			showAlert() {
+				this.alert.show();
+			}
+		}
+
+
+	@ViewChildren
+	-------------
+		When there are multiple embedded components in the template, we can also use @ViewChildren. It collects a list of instances of the Alert component, stored in a QueryList object that behaves similar to an array.
+
+		import { Component, QueryList, ViewChildren } from '@angular/core';
+		import { AlertComponent } from './alert.component';
+
+		@Component({
+			selector: 'app-root',
+			template: `
+				<app-alert ok="Next" (close)="showAlert(2)">
+					Step 1: Learn angular
+				</app-alert>
+
+				<app-alert ok="Next" (close)="showAlert(3)">
+					Step 2: Love angular
+				</app-alert>
+
+				<app-alert ok="Close">
+					Step 3: Build app
+				</app-alert>
+
+				<button (click)="showAlert(1)">Show steps</button>
+			`
+		})
+
+	export class AppComponent {
+		
+		@ViewChildren(AlertComponent) alerts: QueryList<AlertComponent>;
+		
+		alertsArr = [];
+
+		ngAfterViewInit() {
+			this.alertsArr = this.alerts.toArray();
+		}
+
+		showAlert(step) {
+			this.alertsArr[step - 1].show(); // step 1 is alert index 0
+		}
+	}
