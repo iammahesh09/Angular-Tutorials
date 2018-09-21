@@ -2378,3 +2378,26 @@ Angular - Promise vs Observable
 	5. Observable supports map, filter, reduce and similar operators. Whereas, Promises have more readable codes with try/catch and async/await.
 
 	6. In observable, one operator ‘retry’ can be used to retry whenever needed. Whereas, Promises cannot be retried. A promise should have access to the original function that returned the promise in order to have a retry capability.
+
+
+
+
+HTTP, Observable and Rxjs
+-------------------------
+
+	HTTP, Observable
+	----------------
+
+		1. HTTP Get request from AppService
+
+		2. Receive the observable and cast it into an employee array
+
+		3. Subscribe to the Observable from ComponetOne and ComponentTwo
+
+		4. Assign the employee arry to a local variable
+
+
+	Rxjs
+	----
+		- Reacive Extensions for JavaScript
+		- External library to work with Observable 
