@@ -1373,3 +1373,10 @@ Conditional (ternary) Operator
 			this.alertsArr[step - 1].show(); // step 1 is alert index 0
 		}
 	}
+
+
+
+@ContentChild and @ContentChildren
+----------------------------------
+	@ContentChild and @ContentChildren work the same way as the equivalent @ViewChild and @ViewChildren, however, the key difference is that @ContentChild and @ContentChildren select from the projected content within the component.
+
