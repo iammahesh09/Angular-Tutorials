@@ -1260,3 +1260,40 @@ Angular - NgStyle and Style Binding
 
 			}
 
+
+
+Conditional (ternary) Operator
+------------------------------
+
+	Conditional operator that is also called ternary operator, is used as a short cut of if else statement.
+
+	# condition ? expr1 : expr2
+
+		When the condition is true then expr1 will be returned otherwise expr2 will be returned
+
+			<p [style.color] = "result > 30 ? 'blue' : 'green'"> Hello Color World! </p>
+
+			<p bind-style.color = "result > 30 ? 'blue' : 'green'"> Hello Color World! </p>
+
+			<p style.color = "{{result > 30 ? 'blue' : 'green'}}"> Hello Color World! </p>  
+
+
+		myStyles = {
+			'color': this.colorFlag ? 'black' : 'yellow',
+			'font-size.em': this.isSmall ? this.small/5 : this.big/5,
+			'background-image': !this.isBackgroundRed ? 'url(\'images/red.gif\')' : 'url(\'images/green.gif\')'
+		}; 
+
+
+		getMyStyles() {
+
+			let myStyles = {
+				'color': this.colorFlag ? 'black' : 'yellow',
+				'font-size.em': this.isSmall ? this.small/5 : this.big/5,
+				'background-image': !this.isBackgroundRed ? 'url(\'images/red.gif\')' : 'url(\'images/green.gif\')'
+			};
+
+			return myStyles;
+
+		}
+
