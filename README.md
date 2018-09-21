@@ -1197,3 +1197,66 @@ Angular - Data Binding
 				}
 			}
 
+
+
+
+Angular - NgStyle and Style Binding
+-----------------------------------
+	Style binding binds an inline style property with a given value and NgStyle sets more than one inline styles dynamically. Style binding is used in the same way as property binding is used. Style binding can bind only one inline CSS property at one time. When we want to use more than one style property at one time dynamically then the role of NgStyle directive comes into picture. NgStyle and style property binding both can be used with bracket [] and bind- keyword. Here on this page we are providing the example for style binding and NgStyle with style properties such as color, font-size, background-image. 
+
+
+	Style Binding
+	-------------
+		Style binding binds an inline style property with a given value. Style binding is used in the same way as property binding is used. Style binding can bind only one inline CSS property at one time.
+
+		Here style is a prefix and style-property is a name of a CSS style property. style prefix and style property are concatenated using dot (.) . Style property binding can be achieved with bracket [], bind- keyword and interpolation {{}}. Now find the code to use style binding.
+
+			<p [style.color] = "result"> Hello Color World! </p>
+
+			<p bind-style.color = "result"> Hello Color World! </p>
+
+			<p style.color = "{{result}}"> Hello Color World! </p> 
+
+
+
+	NgStyle Binding
+	---------------
+		NgStyle directive is used to set many inline styles dynamically. Setting styles using NgStyle works as key:value pair. key is the style property name and value is the style value.
+
+		Example-1
+		---------
+			<p [ngStyle]="myStyles1">You say tomato, I say tomato</p>
+
+			<p [ngStyle]="['myStyles1','myStyles2']">You say tomato, I say tomato</p>
+
+			myStyles1 = {
+				'background-color': 'lime',
+				'font-size': '20px',
+			}
+			myStyles2 = {
+				'color':'blue',
+				'font-weight': 'bold'
+			}
+
+		Example-2
+		---------
+			<p [ngStyle]="{'background-color': 'lime','font-size': '20px','font-weight': 'bold'}">
+				You say tomato, I say tomato
+			</p>
+
+		Example-3
+		---------
+			<p [ngStyle]="setMyStyles()">You say tomato, I say tomato</p>
+
+
+			setMyStyles() {
+
+				let styles = {
+					'background-color': 'red',
+					'font-weight': 'bold'
+				};
+
+				return styles;
+
+			}
+
