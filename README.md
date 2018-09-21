@@ -1380,3 +1380,121 @@ Conditional (ternary) Operator
 ----------------------------------
 	@ContentChild and @ContentChildren work the same way as the equivalent @ViewChild and @ViewChildren, however, the key difference is that @ContentChild and @ContentChildren select from the projected content within the component.
 
+
+
+Angular - Pipes "|"
+-------------------
+
+	The Angular pipes are used to Transform the Data. 
+
+	For Example, the Date pipe formats the date according to locale rules. We can pass arguments to pipe and chain pipes. The Angular also allows us to create the Custom Pipe
+
+	Built-in pipes
+	--------------
+		Angular comes with a stock of pipes such as 
+
+		"date", "uppercase", "lowercase", "currency", "json" and "percent". 
+
+		They are all available for use in any template.
+
+		To apply a pipe on a bound property use the pipe character " | "
+
+	lowercase
+	---------
+		{{employee.code | lowercase}}
+
+	uppercase
+	---------
+		{{employee.code | uppercase}}
+
+
+	decimal
+	-------
+
+	date
+	----
+		date_expression | date[:format]
+
+		{{employee.dateOfBirth | date:'dd/MM/y'}}
+
+		{{employee.dateOfBirth | date:'fullDate'}}
+
+	format 
+	------
+		'medium': equivalent to 'yMMMdjms' (e.g. Sep 3, 2010, 12:05:08 PM for en-US)
+		'short': equivalent to 'yMdjm' (e.g. 9/3/2010, 12:05 PM for en-US)
+		'fullDate': equivalent to 'yMMMMEEEEd' (e.g. Friday, September 3, 2010 for en-US)
+		'longDate': equivalent to 'yMMMMd' (e.g. September 3, 2010 for en-US)
+		'mediumDate': equivalent to 'yMMMd' (e.g. Sep 3, 2010 for en-US)
+		'shortDate': equivalent to 'yMd' (e.g. 9/3/2010 for en-US)
+		'mediumTime': equivalent to 'jms' (e.g. 12:05:08 PM for en-US)
+		'shortTime': equivalent to 'jm' (e.g. 12:05 PM for en-US)
+
+	currency
+	--------
+		{{employee.annualSalary | currency:'USD':true:'1.3-3'}}
+
+		Example:
+		--------
+			@Component({
+
+			selector:"my-pipes",
+
+			template:` 	
+				<h2>Hello {{name | uppercase }}</h2> 
+				//Hello MAHESH
+
+				<h2>Hello {{name | lowercase }}</h2>	
+				//Hello mahesh
+
+				<h2>Hello {{name | slice:'2' }}</h2>	
+				//Hello hesh
+
+				<h2>Hello {{name | slice:'2':'5' }}</h2> 	
+				//Hello hes
+
+				<h2>Hello {{name | replace:'Mahesh':'Manoj' }}</h2>		
+				//Hello Manoj
+
+				<h2>{{num}}</h2>	// 2.569							
+
+				<h2>{{num | number:'1.2-2'}}</h2>	
+				//2.57
+
+				<h2>{{num | number:'2.2-2'}}</h2>	
+				//02.57
+
+				<h2>{{num | number:'2.4-5'}}</h2>	
+				//02.5690
+
+				<h2>American Currency - {{num | currency:'USD':true}}</h2>	
+				//American Currency - $2.569
+
+				<h2>British Currency - {{num | currency:'GBP':true}}</h2>	
+				//British Currency - £2.569				
+
+				<h2>Inidan Currency - {{num | currency:'INR':true}}</h2>	
+				//Inidan Currency - ₹2.569
+
+				<h2>Current Date - {{date}}</h2>	
+				//Current Date - Thu May 04 2017 19:25:08 GMT+0530 (India Standard Time)
+
+				<h2>Current Full Date - {{date | date:"fullDate"}}</h2>		
+				//Current Full Date - Thursday, May 4, 2017
+
+				<h2>Current Short Date - {{date | date:"shortDate"}}</h2>	
+				//Current Full Date - 5/4/2017
+
+				<h2>Current Short Time - {{date | date:"shortTime"}}</h2>	
+				//Current Full Date - 7:25 PM
+
+				<h2>Current "MM/dd/yy" Date Type - {{date | date:"MM/dd/yy"}}</h2>
+			`,
+			})
+
+
+			export class testComponent{
+				public name ="Mahesh";
+				public num =2.569;
+			}
+
