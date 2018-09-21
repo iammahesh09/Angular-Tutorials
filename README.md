@@ -2417,3 +2417,11 @@ CanActivate and CanActivateChild
 	-> CanActivate is used for "authentication" and CanActivateChild is used for "authorization"
 
 	-> Angular Route interface provides canActivate and canActivateChild properties to configure service class which is implementing CanActivate and CanActivateChild interfaces. 
+
+
+
+Explain Authentication and Authorization.
+-----------------------------------------
+	- Authentication: The user login credentials are passed to an authenticate API (on the server). On the server side validation of the credentials happens and a JSON Web Token (JWT) is returned. JWT is a JSON object that has some information or attributes about the current user.  Once the JWT is given to the client, the client or the user will be identified with that JWT.
+
+	-Authorization: After logging in successfully, the authenticated or genuine user does not have access to everything. The user is not authorized to access someone else’s data,  he/she is authorized to access some data.
