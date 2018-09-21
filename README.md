@@ -1951,3 +1951,25 @@ Custom Event Binding using @Output and EventEmitter
 
 		EventEmitter is really an Angular abstraction, and should be used pretty much only for emitting custom Events in components.
 
+
+
+Angular - Template Reference Variable
+------------------------------------
+	A template reference variable is a reference to a DOM element or directive within a template. Using template reference variable we access the values of DOM element properties. 
+
+	Template reference variable is declared using '#' and 'ref-' as prefix, 
+
+	Template Reference Variable Syntax
+
+		1. Using #
+
+			<input type="text" #myVar>  
+
+			Here myVar will be a template reference variable. 
+
+		2. Using ref-
+
+			<input type="text" ref-myVar>  
+
+			Here myVar will be a template reference variable.
+
