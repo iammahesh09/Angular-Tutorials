@@ -823,3 +823,33 @@ Dependency injection
 			providers : [classname] 
 		})
 
+
+
+viewEncapsulation 
+------------------
+
+	viewEncapsulation decides whether the styles defined in a component can affect the entire application or not.
+
+	- Emulated: styles from other HTML spread to the component.
+
+		"viewEncapsulation.Emulated" is completly defulat (attributes) the encapsulation.
+
+	- Native: styles from other HTML do not spread to the component.
+
+		"viewEncapsulation.Native" is browsers supports "shadow DOM" ("shadow-root" open).
+
+	- None: styles defined in a component are visible to all components.
+
+		"viewEncapsulation.none" is completly disabled (attributes, ex:_nghost-atr-1, ngcontent-atr-1, ... etc) the encapsulation.
+
+
+	Ex:-
+	---
+		import { Component, ViewEncapsulation } from '@Angular/core';
+
+		@Component({
+			selector:'my-movies',
+			template:'<h3>Movies List</h3>',
+			encapsulation: ViewEncapsulation.Emulated
+		})
+
