@@ -1,51 +1,30 @@
-"# Angular-Tutorials" 
-
-
-Angular
-*******
+What is Angular
+---------------
 	Angular 2+ versions are simply called Angular. 
 
 	It is a TypeScript-based open-source front-end web application platform.
 
-	Angular is different from AngularJS as it is written completely in Typescript and includes the ES6 specification. 
-
-	As it is not updated version of AngularJS so it is rewritten and has many changes.
+	Angular is written completely in Typescript and includes the ES6 specification. 
 
 	Angular is a Framework to build mobile and desktop application.
 
-	Features
-	--------
-		- Module
+	Angular Architecture & Features
+	-------------------------------
+		- Modules
+
 		- Components
+
+		- Templates
+
+		- Metadata
+
+		- Data binding
+
 		- Directives
+
 		- Services
-		- Routers
 
-
-	Core Features
-	-------------
-		- Components
-		- Directives
-		- templates
-
-
-
-
-
-Angular Architecture
---------------------
-
-	-> Angular is completely based on modular programming, Code is divided in reusable components. 
-
-	-> Angular App - one or more modules
-
-	-> Module - each module one or more components and services
-
-	-> Components - component contains an HTML template and class to control the logic for that particular view
-
-	-> services - module can also have services which contains the "Business login" of application
-
-	-> Modules export and import code as and when required and finally render the view in the browser
+		- Dependency injection
 
 
 
@@ -60,39 +39,6 @@ Ng Self Commands
 	-> lint  : "ng lint",
 
 	-> e2e   : "ng e2e"
-
-
-
-Angular - Highlights
---------------------
-
-	- Angular is mobile oriented & better in performance.
-
-	- Angular provides more choice for languages.
-
-	- Angular implements web standards like components.
-
-	- Angular is not easy to setup as AngularJS.
-
-	- AngularJS controllers and $scope are gone.
-
-	- Different ways to define local variables.
-
-	- Structural directives syntax is changed.
-
-	- Angular uses camelCase syntax for built-in directives.
-
-	- Angular directly uses the valid HTML DOM element properties and events.
-
-	- One-way data binding directive replaced with [property].
-
-	- Two-way data binding: ng-model replaced with [(ngModel)]
-
-	- Way of Bootstrapping Angular Application is changed:
-
-	- Ways of Dependency Injection is Changed- syntax changed.
-
-	- Way of routing is Changed- syntax changed.
 
 
 
@@ -164,28 +110,16 @@ Understanding the File Structure
 
 
 
-Angular Module
---------------
+Angular Modules
+---------------
+		
+	- Angular apps are modular
+	
+	- Angular has its own modularity system called Angular modules or NgModules.
+	
+	- Every Angular app has at least one Angular module class, the root module, conventionally named AppModule.
 
-	- Angular Module is a container for cohesive block of code
 	- Angular module is a collection of components, services, directives and pipes
-
-	Angular NgModule
-	------------------
-		Angular apps are modular and Angular has its own modularity system called "NgModule".
-
-
-		Every Angular app has at least one NgModule class, the root module, conventionally named AppModule.
-
-		AppModule is the root module which bootstraps and launches the angular application
-
-		While the root module may be the only module in a small application, most apps have many more feature modules, each a cohesive block of code dedicated to an application domain, a workflow, or a closely related set of capabilities.
-
-		An NgModule, whether a root or feature, is a class with an @NgModule decorator.
-
-
-
-		NgModule is a decorator function that takes a single metadata object whose properties describe the module. 
 
 
 
@@ -216,15 +150,26 @@ Angular Module
 	src/app/app.module.ts
 	---------------------
 
-		import { NgModule }      from '@angular/core';
+		import { NgModule } from '@angular/core';
 		import { BrowserModule } from '@angular/platform-browser';
+		import { HttpClientModule } from '@angular/common/http';
+		import { FormsModule } from '@angular/forms'
+
+		import { AppComponent } from './app.component';
+		import { MainComponent } from './main/main.component';
 
 		@NgModule({
-			imports:      [ BrowserModule ],
-			providers:    [ Logger ],
-			declarations: [ AppComponent ],
-			exports:      [ AppComponent ],
-			bootstrap:    [ AppComponent ]
+			declarations: [
+				AppComponent,
+				HomeComponent
+			],
+			imports: [
+				BrowserModule,
+				FormsModule,
+				HttpClientModule
+			],
+			providers: [],
+			bootstrap: [AppComponent]
 		})
 
 	export class AppModule { }
@@ -234,17 +179,25 @@ Angular Module
 Angular - Component
 ---------------------
 
-	The Component is the main building block of an Angular Application. 
+	The Component is a classes that interact with the View (UserInterface)
 
-	A Component contains the definition of the View and the data that defines how the View looks and behaves.  
+	which is decorated by @Component class decorator
 
-	The Angular Components are plain javascript classes and defined using @component Decorator. 
+	The Component has four important parts
 
-	This Decorator provides the component with the View to display & Metadata about the class
+		Import Statement - The Import statement imports the dependencies required by this component.
+		
+		Classes - The class contains the application logic. It is decorated by the @Component class decorator.
+		
+		Template - .html
+		
+		Metadata
+
+	  
 
 
-	Metadata Properties:
-	-------------------
+	Component Metadata Properties:
+	-----------------------------
 		selector - css selector that identifies this component in a template
 
 		styleUrls - list of urls to stylesheets to be applied to this component's view
@@ -283,6 +236,61 @@ Angular - Component
 
 
 
+		Example :
+
+			import { Component } from '@angular/core';
+			 
+			@Component({
+			    selector: 'bank-app',
+			    template: '<h1>Hello & Welcome to ABC Bank Ltd. </h1>',
+			    styleUrls:['style.css']
+			})
+
+			export class BankComponent{ }
+
+
+
+Angular - Template
+------------------
+	The Component needs a View to display. The Template defines that View.
+
+	The Template is just a subset of HTML, that tells Angular how to display the view. It is created using the normal HTML tags like h1, h2 etc. 
+
+	It also uses the Angular-specific markup like 
+
+	{{}} for interpolation, 
+
+	[] for Property binding, 
+
+	() for Event binding ...etc
+
+
+
+Angular - Metadata
+------------------
+	Metadata tells angular how to Process the class.
+
+	The Metadata is attached to the class using a class decorator. When we attach @Component class decorator to the class, then it becomes Component class.
+
+	The class Decorator uses the configuration object, which provides the Angular information it needs to create the component. 
+
+		- @Component
+		
+		- @Directive
+		
+		- @Injectible
+		
+		- @NgModule
+		
+		- @Pipe
+
+	For Example, 
+
+		@Component directives come with configuration options like selector, templateURL, directives ..etc
+
+		@Directive directives come with configuration options like selector, providers, exportAs ..etc
+
+
 
 Angular - Directives
 --------------------
@@ -293,7 +301,6 @@ Angular - Directives
 	The Angular directives are classified into three categories based on how they behave.  
 
 	They are Component, Structural and Attribute Directives
-
 
 
 	Metadata Properties:
@@ -348,25 +355,16 @@ Angular - Directives
 	We have three kinds of directives:
 	----------------------------------
 
-	1. Components: yes a component is a directive. (@Component)
+	1. Structural Directives: 
 
-		==> A component is a directive with a template.
-
-		==> @Component decorator extends the @Directive
-
-		==> In Angular applications the component is the main
-
-
-	2. Structural Directives: 
-
-		-	The "ngFor" is repeats a portion of HTML template once per each item from an iterable list (Collection). 
+		-	The "ngFor" is repeats a portion of HTML template once per each item from an iterable list (Collection).
 
 		-	The "ngSwitch" allows us to Add/Remove DOM Element. It is similar to switch statement.  
 
 		-	The "ngIf" allows us to Add/Remove DOM Element. 
 
 
-	3. Attribute Directives:
+	2. Attribute Directives:
 
 		-	The ngClass Directive is allows us to add or remove CSS classes to an HTML element. 
 
@@ -374,7 +372,7 @@ Angular - Directives
 		Using the ngStyle you can dynamically change the style of your HTML element.
 
 
-	4. Create Custom Directives:
+	3. Create Custom Directives:
 
 
 
@@ -384,7 +382,6 @@ Angular - Directives
 
 		NgStyle Directive
 		-----------------
-
 			Angular provides a built-in directive, ngStyle, to modify a component or element's style attribute. Here's an example:
 
 			Example-1
@@ -405,7 +402,6 @@ Angular - Directives
 
 			Example-2
 			---------
-
 				@Component({
 					selector: 'app-style-example',
 					template: `
@@ -427,35 +423,23 @@ Angular - Directives
 				}
 
 
-
 			NgClass Directive
 			-----------------
-
 				It is used to add and remove CSS classes on an HTML element. We can bind several CSS classes to NgClass simultaneously that can be added or removed. There are different ways to bind CSS classes to NgClass that are using string, array and object.
 
 				Binding a string
 				----------------
 					@Component({
 						selector: 'app-class-as-string',
-
 						template: `
 							<p ngClass="centered-text underlined" class="orange">
 								<ng-content></ng-content>
 							</p>
 						`,
-
 						styles: [`
-							.centered-text {
-								text-align: center;
-							}
-
-							.underlined {
-								border-bottom: 1px solid #ccc;
-							}
-
-							.orange {
-								color: orange;
-							}
+							.centered-text { text-align: center; }
+							.underlined { border-bottom: 1px solid #ccc; }
+							.orange{ color: orange; }
 						`]
 					})
 
@@ -524,7 +508,7 @@ Angular - Directives
 	Structural Directives
 	---------------------
 
-		Structural directives are responsible for HTML layout. typically by adding, removing, or manipulating DOM. 
+		Structural directives are responsible for HTML layout. typically by adding, removing, or manipulating DOM.
 
 		Angular has a few built-in structural directives such as 'ngIf', 'ngFor', and 'ngSwitch'
 
@@ -549,15 +533,14 @@ Angular - Directives
 				}
 
 
-
 			Example-2
 			---------
 
-			<h2 *ngIf="isReq; else isFalse">Condition is true, Hello! Q</h2> 	// Output
+				<h2 *ngIf="isReq; else isFalse">Condition is true, Hello! Q</h2> 	// Output
 
-			<ng-template #isTrue>
-				<h2>Condition is False</h2>	
-			</ng-template>
+				<ng-template #isTrue>
+					<h2>Condition is False</h2>	
+				</ng-template>
 
 
 			Example-3
@@ -710,16 +693,16 @@ Angular - Directives
 				selector: 'app-root',
 				template: `
 					<div class="tabs-selection">
-					<app-tab [active]="isSelected(1)" (click)="setTab(1)">Tab 1</app-tab>
-					<app-tab [active]="isSelected(2)" (click)="setTab(2)">Tab 2</app-tab>
-					<app-tab [active]="isSelected(3)" (click)="setTab(3)">Tab 3</app-tab>
+						<app-tab [active]="isSelected(1)" (click)="setTab(1)">Tab 1</app-tab>
+						<app-tab [active]="isSelected(2)" (click)="setTab(2)">Tab 2</app-tab>
+						<app-tab [active]="isSelected(3)" (click)="setTab(3)">Tab 3</app-tab>
 					</div>
 
 					<div [ngSwitch]="tab">
-					<app-tab-content *ngSwitchCase="1">Tab content 1</app-tab-content>
-					<app-tab-content *ngSwitchCase="2">Tab content 2</app-tab-content>
-					<app-tab-content *ngSwitchCase="3"><app-tab-3></app-tab-3></app-tab-content>
-					<app-tab-content *ngSwitchDefault>Select a tab</app-tab-content>
+						<app-tab-content *ngSwitchCase="1">Tab content 1</app-tab-content>
+						<app-tab-content *ngSwitchCase="2">Tab content 2</app-tab-content>
+						<app-tab-content *ngSwitchCase="3"><app-tab-3></app-tab-3></app-tab-content>
+						<app-tab-content *ngSwitchDefault>Select a tab</app-tab-content>
 					</div>`
 			})
 
@@ -793,7 +776,6 @@ Angular - Directives
 
 
 
-
 Dependency injection
 --------------------
 
@@ -832,91 +814,38 @@ viewEncapsulation
 
 	- Emulated: styles from other HTML spread to the component.
 
-		"viewEncapsulation.Emulated" is completly defulat (attributes) the encapsulation.
+		# encapsulation: ViewEncapsulation.Emulated
+
+			- Angular will not create a Shadow DOM for the component.
+			- Style will be scoped to the component.
+			- This is the default value for encapsulation.
 
 	- Native: styles from other HTML do not spread to the component.
 
-		"viewEncapsulation.Native" is browsers supports "shadow DOM" ("shadow-root" open).
+		# encapsulation: ViewEncapsulation.Native
+
+			- is browsers supports "shadow DOM" ("shadow-root" open).
+			- Angular will create Shadow DOM for the component.
+			- Style is scoped to the component.
 
 	- None: styles defined in a component are visible to all components.
 
-		"viewEncapsulation.none" is completly disabled (attributes, ex:_nghost-atr-1, ngcontent-atr-1, ... etc) the encapsulation.
+		# encapsulation: ViewEncapsulation.none
+
+			- is completly disabled (attributes, ex:_nghost-atr-1, ngcontent-atr-1, ... etc) the encapsulation.
+			- There is no shadow DOM.
+			- Style is not scoped to the component.
 
 
-	Ex:-
-	---
-		import { Component, ViewEncapsulation } from '@Angular/core';
+		Ex:-
+		---
+			import { Component, ViewEncapsulation } from '@Angular/core';
 
-		@Component({
-			selector:'my-movies',
-			template:'<h3>Movies List</h3>',
-			encapsulation: ViewEncapsulation.Emulated
-		})
-
-
-
-One way Data Binding & Two way Data Binding in Angular
-------------------------------------------------------
-
-	One way Data Binding
-	--------------------
-		@Component({ 
-			selector: 'my-app', 
-			template: ` Name : <input [value]='username'> <br>
-			You entered : {{username}} `
-		})
-
-		export class AppComponent { 
-			username: string = 'Tom Jhon';
-		}
-
-		- [input [value]='username'] : Binds component class "username" property to the input element’s value property
-
-		- You entered : {{username}} : Interpolation displays the value we have in "username" property on the web page
-
-
-		At the moment when we change the value in the textbox, that changed value is not reflected in the browser. One way to achieve this is by binding to the input event of the input control as shown below.
-
-
-	Two way Data Binding
-	--------------------
-
-		Data binding is the synchronization of data between the model and view components.
-
-		Two-way data binding merges property and event binding in a single notation using the directive "ngModel"
-
-		<input type="text" [(ngModel)]="name">
-
-		<h1>{{name}}</h1>
-
-			Example
-			-------
-				Ex1: -	
-					<input [(ngModel)]="username">
-
-					<p>Hello {{username}}!</p>
-
-
-				Ex2: -	
-					<input [value]="username" (input)="username = $event.target.value">
-
-					<p>Hello {{username}}!</p>
-
-
-						->	[value]="username" - Binds the expression username to the input element’s value property
-
-						-> (input)="expression" - Is a declarative way of binding an expression to the input element’s input event (yes there’s such event)
-
-						-> username = $event.target.value - The expression that gets executed when the input event is fired
-
-						-> $event - Is an expression exposed in event bindings by Angular, which has the value of the event’s payload
-
-
-				Ex3: -	
-					<input [ngModel]="username" (ngModelChange)="username = $event">
-
-					<p>Hello {{username}}!</p>
-
+			@Component({
+				selector:'my-movies',
+				template:'<h3>Movies List</h3>',
+				encapsulation: ViewEncapsulation.Emulated
+			})
 
 
 
@@ -939,12 +868,12 @@ Angular - Data Binding
 
 	Property Binding
 	----------------
-		Property binding is performed as one-way from data source to view target. especially in case of styles and attribute bindings. It has a syntax []
+		Property binding is performed as one-way from data source to view target. especially in case of styles and attribute bindings. It has a syntax [Property]="expression"
 
 		In property binding there is source and target.
 
-		Using square brackets []
-		Using bind- Keyword		
+		Using square brackets "[]"
+		Using "bind-" Keyword		
 
 		Ex:-
 			<img src="{{ Logo }}">
@@ -981,31 +910,17 @@ Angular - Data Binding
 	Angular Event Binding
 	----------------------
 
-		Event binding is a data binding from an event to a component, The events are standard browser events such as Click, DoubleClick etc.
-
-
-		For example the following is the syntax for binding to the click event of a button. Within parentheses on the left of the equal sign we have the target event, (click) in this case and on the right we have the template statement. In this case the onClick() method of the component class is called when the click event occurs.
+		Event Binding is used to Perform an action in the component when the user clicks a button in the view.
+ 
+			<button (click)=’ClickPressed()’>
 
 			<button (click)="isValid=true">True</button>  
 
-		canonical form And event binding using on- keyword is achieved as follows.
-
 			<button on-click="isValid=true">True</button>  
-
+		
 		Call component method on event binding.
 
 			<input (change) = "changeText($event.target.value)">  
-
-
-		very time we click the button, 'Button Clicked' message is logged to the console. You can see this message under the Console tab, in the browser developer tools.
-
-		Another Example : Initially when the page loads we want to display only the First Name and Last of Employee. We also want to display "Show Details" button.
-
-		When we click "Show Details" button, we want to display "Gender" and "Age" as well. The text on the button should be changed to "Hide Details". When we click "Hide Details" button, "Gender" and "Age" should be hidden and the button text should be changed to "Show Details".
-
-		To achieve this we will make use of event binding in Angular. We will also make use of one of the structural directives "ngIf" in angular.
-
-		Code in employee.component.ts : Notice we have introduced "showDetails" boolean property. The default value is false, so when the page first loads, we will have "Gender" and "Age" hidden. We also have a method, toggleDetails(), which toggles the value of showDetails. 
 
 
 		@Component({ 
@@ -1057,8 +972,8 @@ Angular - Data Binding
 		<button (click)="toggleDetails()">{{showDetails? 'Hide':'Show'}} Details</button>
 
 		
-	Explain $event in Angular
-	-------------------------
+		Explain $event in Angular
+		-------------------------
 	 
 		- In Angular $event is a reserved keyword that represents the data emitted by an event (event data).
 		- It is commonly used as a parameter for event based methods.
@@ -1082,7 +997,7 @@ Angular - Data Binding
 
 	
 	Angular - Class Binding
-	---------------------------
+	-----------------------
 		We can add and remove CSS class names from the HTML element class attribute using CSS class binding. CSS class binding is same as property binding. But we need to add a prefix "class." with CSS class name in class binding. The CSS class added by class binding will override the existing CSS class properties if any property will be common. CSS class binding removes CSS class when expression returns false and adds it when expression returns true.
 
 		To add or remove more than one CSS class dynamically we should use NgClass directive. 
@@ -1106,6 +1021,12 @@ Angular - Data Binding
 			<div class="text-green">Hello Wordl!</div>
 
 			<div [class.text-green]="isReq">Hello Wordl!</div>
+
+			<p class="{{condition ? 'alret-success' : 'alret-danger'}}">
+
+			<p [ngClass]="condition ? 'alret-success' : 'alret-danger'">
+
+			<p [ngClass]="[condition ? 'alret-success' : 'alret-danger']">
 
 			<div class="text-green" [class.text-danger]="isOptional('yes')">Hello Wordl!</div>
 
@@ -1199,6 +1120,69 @@ Angular - Data Binding
 
 
 
+One way Data Binding & Two way Data Binding in Angular
+--------------------------------------------------------
+
+	One way Data Binding
+	--------------------
+		@Component({ 
+			selector: 'my-app', 
+			template: ` Name : <input [value]='username'> <br>
+			You entered : {{username}} `
+		})
+
+		export class AppComponent { 
+			username: string = 'Tom Jhon';
+		}
+
+		- [input [value]='username'] : Binds component class "username" property to the input element’s value property
+
+		- You entered : {{username}} : Interpolation displays the value we have in "username" property on the web page
+
+
+		At the moment when we change the value in the textbox, that changed value is not reflected in the browser. One way to achieve this is by binding to the input event of the input control as shown below.
+
+
+	Two way Data Binding
+	--------------------
+
+		Data binding is the synchronization of data between the model and view components.
+
+		Two-way data binding merges property and event binding in a single notation using the directive "ngModel"
+
+		<input type="text" [(ngModel)]="name">
+
+		<h1>{{name}}</h1>
+
+			Example
+			-------
+				Ex1: -	
+					<input [(ngModel)]="username">
+
+					<p>Hello {{username}}!</p>
+
+
+				Ex2: -	
+					<input [value]="username" (input)="username = $event.target.value">
+
+					<p>Hello {{username}}!</p>
+
+
+						->	[value]="username" - Binds the expression username to the input element’s value property
+
+						-> (input)="expression" - Is a declarative way of binding an expression to the input element’s input event (yes there’s such event)
+
+						-> username = $event.target.value - The expression that gets executed when the input event is fired
+
+						-> $event - Is an expression exposed in event bindings by Angular, which has the value of the event’s payload
+
+
+				Ex3: -	
+					<input [ngModel]="username" (ngModelChange)="username = $event">
+
+					<p>Hello {{username}}!</p>
+
+
 
 Angular - NgStyle and Style Binding
 -----------------------------------
@@ -1216,6 +1200,10 @@ Angular - NgStyle and Style Binding
 			<p bind-style.color = "result"> Hello Color World! </p>
 
 			<p style.color = "{{result}}"> Hello Color World! </p> 
+
+			<p [ngStyle]="{ 'color': value }">Hello</p>
+
+			<p [ngStyle]="{ 'color': (value ? 'white' : 'red') }">Hello</p>
 
 
 
@@ -1275,8 +1263,7 @@ Conditional (ternary) Operator
 
 			<p bind-style.color = "result > 30 ? 'blue' : 'green'"> Hello Color World! </p>
 
-			<p style.color = "{{result > 30 ? 'blue' : 'green'}}"> Hello Color World! </p>  
-
+			<p style.color = "{{result > 30 ? 'blue' : 'green'}}"> Hello Color World! </p>
 
 		myStyles = {
 			'color': this.colorFlag ? 'black' : 'yellow',
@@ -1391,13 +1378,17 @@ Angular - Pipes "|"
 
 	Built-in pipes
 	--------------
-		Angular comes with a stock of pipes such as 
 
-		"date", "uppercase", "lowercase", "currency", "json" and "percent". 
+		"date", "uppercase", "lowercase", "currency", "json", decimal, slice and "percent". 
 
 		They are all available for use in any template.
 
 		To apply a pipe on a bound property use the pipe character " | "
+
+	Syntax :
+		
+		Expression | pipeOperator[:pipeArguments]
+
 
 	lowercase
 	---------
@@ -1406,6 +1397,26 @@ Angular - Pipes "|"
 	uppercase
 	---------
 		{{employee.code | uppercase}}
+
+	slice
+	-----
+		Creates a new List or String containing a subset (slice) of the string or array. This Pipe uses the JavaScript API Array.prototype.slice() and String.prototype.slice().
+		
+		Syntax
+			array_or_string_expression | slice:start[:end]
+
+	percent
+	-------
+		{{ value_expression | percent [ : digitsInfo [ : locale ] ] }}
+
+		  a: number = 0.259;
+		  b: number = 1.3495;
+
+		<p>A: {{a | percent}}</p>	//26%
+ 
+	    <p>B: {{b | percent:'4.3-5'}}</p>	//0,134.950%
+	 
+	    <p>B: {{b | percent:'4.3-5':'fr'}}</p>	//0 134,950 %
 
 
 	decimal
@@ -1496,91 +1507,90 @@ Angular - Pipes "|"
 			export class testComponent{
 				public name ="Mahesh";
 				public num =2.569;
+				a: number = 0.259;
+  				b: number = 1.3495;
 			}
 
 
 
-Custom pipes
-------------
+	Custom pipes
+	-------------
+		- Create custom pipe.
+		- Transforming the value. 
+		- Override transform() method. 
+		- Returning the new value 
+		- Accepting arguments 
 
-	- Create custom pipe.
-	- Transforming the value. 
-	- Override transform() method. 
-	- Returning the new value 
-	- Accepting arguments 
+		(OR)
 
-	(OR)
+		Step 1 : 
+		--------
+			To achieve this let's create a custom pipe called employeeTitlePipe. Right click on the "employee" folder and add a new TypeScript file. Name it "employeeTitle.pipe.ts". Copy and paste the following code.
 
-
-	Step 1 : 
-	--------
-		To achieve this let's create a custom pipe called employeeTitlePipe. Right click on the "employee" folder and add a new TypeScript file. Name it "employeeTitle.pipe.ts". Copy and paste the following code.
-
-		Code Explanation : 
-		----------------
-		
-		1. Import Pipe decorator and PipeTransform interface from Angular core
-
-		2. Notice "EmployeeTitlePipe" class is decorated with Pipe decorator to make it an Angular pipe
-
-		3. name property of the pipe decorator is set to employeeTitle. This name can then be used on any HTML page where you want this pipe functionality.
-
-		4. EmployeeTitlePipe class implements the PipeTransform interface. This interface has one method transform() which needs to be implemented.
-
-		5. Notice the transform method has 2 parameters. value parameter will receive the name of the employee and gender parameter receives the gender of the employee. The method returns a string i.e Mr. or Miss. prefixed to the name of the employee depending on their gender.
-
-
-		import {Pipe, PipeTransform } from '@angular/core'
-
-		@Pipe({
-			name:'PriceDiff',
-		})
-
-		export class mobilePipe implements PipeTransform{
+			Code Explanation : 
+			----------------
 			
-			priceChange(value: string, gender: string): string { 
-			
-				if (gender.toLowerCase() == "male") {
+			1. Import Pipe decorator and PipeTransform interface from Angular core
 
-					return "Mr." + value; 
+			2. Notice "EmployeeTitlePipe" class is decorated with Pipe decorator to make it an Angular pipe
 
-				} else {
+			3. name property of the pipe decorator is set to employeeTitle. This name can then be used on any HTML page where you want this pipe functionality.
+
+			4. EmployeeTitlePipe class implements the PipeTransform interface. This interface has one method transform() which needs to be implemented.
+
+			5. Notice the transform method has 2 parameters. value parameter will receive the name of the employee and gender parameter receives the gender of the employee. The method returns a string i.e Mr. or Miss. prefixed to the name of the employee depending on their gender.
+
+
+			import {Pipe, PipeTransform } from '@angular/core'
+
+			@Pipe({
+				name:'PriceDiff',
+			})
+
+			export class mobilePipe implements PipeTransform{
 				
-					return "Miss." + value; 
+				priceChange(value: string, gender: string): string { 
+				
+					if (gender.toLowerCase() == "male") {
+
+						return "Mr." + value; 
+
+					} else {
+					
+						return "Miss." + value; 
+					}
 				}
 			}
-		}
 
 
-	Step 2 : 
-	--------
-		Register "EmployeeTitlePipe" in the angular module where we need it. In our case we need it in the root module. So in app.module.ts file, import the EmployeeTitlePipe and include it in the "declarations" array of NgModule decorator
+		Step 2 : 
+		--------
+			Register "EmployeeTitlePipe" in the angular module where we need it. In our case we need it in the root module. So in app.module.ts file, import the EmployeeTitlePipe and include it in the "declarations" array of NgModule decorator
 
-		import { EmployeeTitlePipe } from './employee/employeeTitle.pipe'
+			import { EmployeeTitlePipe } from './employee/employeeTitle.pipe'
 
-		@NgModule({ 
-			imports: [BrowserModule], 
-			declarations: [AppComponent, EmployeeComponent, EmployeeListComponent, EmployeeTitlePipe], 
-			bootstrap: [AppComponent]
-		})
-		
-		export class AppModule { }
+			@NgModule({ 
+				imports: [BrowserModule], 
+				declarations: [AppComponent, EmployeeComponent, EmployeeListComponent, EmployeeTitlePipe], 
+				bootstrap: [AppComponent]
+			})
+			
+			export class AppModule { }
 
-	Step 3 : 
-	--------
-		In "employeeList.component.html" use the "EmployeeTitlePipe" as shown below. Notice we are passing employee gender as an argument for the gender parameter of our custom pipe. Employee name gets passed automatically.
+		Step 3 : 
+		--------
+			In "employeeList.component.html" use the "EmployeeTitlePipe" as shown below. Notice we are passing employee gender as an argument for the gender parameter of our custom pipe. Employee name gets passed automatically.
 
 
-	Step 4 :
-	-------
-		employee.name | employeeTitle:employee.gender
+		Step 4 :
+		-------
+			employee.name | employeeTitle:employee.gender
 
 
 
 What is an AsyncPipe in Angular?
 --------------------------------
 	When an observable or promise returns something, we use a temporary property to hold the content. Later, we bind the same content to the template. With the usage of AsyncPipe, the promise or observable can be directly used in a template and a temporary property is not required. 
-
 
 
 
@@ -1732,77 +1742,6 @@ Angular - Forms
 		Submitt button Valid Form
 		-------------------------
 			<button [disabled]="!dataFrom.form.valid" type="submit" class="btn btn-primary">Submit</button>
-
-
-
-
-ReactiveForms Validation At The Angular 6
------------------------------------------
-	HTML
-	----
-		<form [formGroup]="memberFrm" novalidate>
-
-			<div class="form-group">
-				<label class="col-md-4">Member Name</label>
-				<input type="text" class="form-control" formControlName="name" #name />
-			</div>
-
-			<div *ngIf="memberFrm.controls['name'].invalid && (memberFrm.controls['name'].dirty || memberFrm.controls['name'].touched)" class="alert alert-danger">
-				<p *ngIf="memberFrm.controls['name'].errors.required">Name is required.</p>
-			</div>
-
-			<div class="form-group">
-				<label class="col-md-4">Member Age</label>
-				<input type="text" class="form-control" formControlName="age" #age/>
-			</div>
-
-			<div *ngIf="memberFrm.controls['age'].invalid && (memberFrm.controls['age'].dirty || memberFrm.controls['age'].touched)" class="alert alert-danger">
-				<p *ngIf="memberFrm.controls['age'].errors.required">Age is required.</p>
-			</div>
-
-			<div class="form-group">
-				<button (click)="addMember(name.value, age.value)" [disabled]="memberFrm.pristine || memberFrm.invalid" class="btn btn-success">Add</button>
-			</div>
-
-		</form>
-
-
-	Create.component.ts
-	-------------------
-
-		import { Component, OnInit } from '@angular/core';
-		import { FormGroup,  FormBuilder,  Validators } from '@angular/forms';
-		import { MemberService } from '../../member.service';
-
-		@Component({
-			selector: 'app-create',
-			templateUrl: './create.component.html',
-			styleUrls: ['./create.component.css']
-		})
-		
-		export class CreateComponent implements OnInit {
-
-				title = 'Add Member';
-				memberFrm: FormGroup;
-
-			constructor(private memberservice: MemberService, private fb: FormBuilder) {
-				this.createForm();
-			}
-
-			createForm() {
-				this.memberFrm = this.fb.group({
-					name: ['', Validators.required ],
-					age: ['', Validators.required ]
-				});
-			}
-
-			addMember(name, age) {
-				this.memberservice.addMember(name, age);
-			}
-
-			ngOnInit(){}
-
-		}
 
 
 
@@ -1975,90 +1914,58 @@ Angular - Template Reference Variable
 
 
 
+Template Reference Variable using Input Text Box
+------------------------------------------------
+	
+	Template reference variable is a variable using which we can access DOM properties. In our example we are using following DOM properties of input box. 
 
-Angular - Routing and Navigation - (Optional)
---------------------------------
-	The Router module handles the navigation & Routing in Angular. 
+	1. placeholder 
+	2. type 
+	3. value Now find the code snippet.
 
-	The Routing allows you to move from one part of the application to another part or one View to another View.  
+		<input type="text" #mobile placeholder="Enter Mobile Number">  
 
+		In the above input text box #mobile is a template reference variable. To fetch DOM properties
 
-	RouterModule
-	------------
-		RouterModule is a separate module in angular that provides required services and directives to use routing and navigation in angular application.
-
-
-		Step 1: 
-		-------
-			Set base tag in index.html
-
-			<base href="/">
-
-		Step 2
-		------
-			Configure routes
-
-
-			Example-1
-			---------
-			Router imports in main 'app.module.ts'
-
-				import { RouterModule } from '@angular/router'
-
-
-				import { AppComponent } from './app.component';
-				import { homeComponent } from './home/app.home';
-				import { aboutComponent } from './about/app.about';
-
-
-				@NgModule({
-					declarations: [AppComponent, homeComponent, aboutComponent],
-					
-					imports: [
-						BrowserModule,
-						RouterModule.forRoot([
-							{path:'Home', component:homeComponent},
-							{path:'About', component:aboutComponent}
-						])
-					],
-
-					providers: [],
-
-					bootstrap: [AppComponent]
-				})
-
-				export class AppModule { }
-
-
-			app.component.ts
-			---------------
-				import { Component } from '@angular/core';
-
-				@Component({
-					selector: 'app-root',
-					templateUrl:'./app.component.html',
-					styleUrls:['./app.component.css'],
-				})
-
-				export class AppComponent {}
-
-
-			app.component.html
-			---------------
-				<nav>
-					<ul>
-						<li><a routerLink="/Home" routerLinkActive="active">Home</a></li>
-						<li><a routerLink="/About" routerLinkActive="active">About</a></li>
-					</ul>
-
-					<router-outlet></router-outlet>
-				</nav>
+			mobile.placeholder : It will give placeholder of our text box if we have specified. 
+			mobile.value : It will give value of our text box. 
+			mobile.type : It will give type of input element. In our example type is text.
 
 
 
+Template Reference Variable using Select Box
+--------------------------------------------
+	Here we will discuss template reference variable with select box.
 
-Angular - Routing and Routes (First Preferred)
-----------------------------------------------
+	<select #myColor (change) = "setData(myColor.value)"></select> 
+
+	Look at the code snippet, #myColor is a template reference variable. The selected value of select box can be accessed by myColor.value .
+
+
+
+Template Reference Variable with NgForm
+---------------------------------------
+	how to access NgForm directive using template reference variable. We are creating a sample form here.
+
+	<form (ngSubmit)="onSubmitPersonForm(myForm)" #myForm="ngForm">
+		<input name="name" required [(ngModel)]="person.pname">
+		<button type="submit" [disabled]="!myForm.form.valid">Submit</button>
+	</form>  
+
+	ngSubmit
+	--------
+		It enables binding angular expressions to onsubmit event of the form. Here on form submit onSubmitPersonForm component method will be called. 
+
+	ngForm
+	------
+		It is the nestable alias of form directive 
+
+		Here we are using template reference variable for ngForm as #myForm="ngForm" . Now we can use myForm in place of ngForm such as to check form validity and we can also use it in our angular expressions.
+
+
+
+Angular - Routing and Routes 
+----------------------------
 	
 	The Angular Router enables navigation from one view to the next as users perform application tasks.
 
@@ -2166,7 +2073,7 @@ Angular - Routing and Routes (First Preferred)
 
 
 Angular - Route Parameters
---------------------------
+----------------------------
 	API stands for Application Program Interface. Simply put, an API is an interface for coders to communicate with applications.
 
 	API acts just like a middleware. When we send requests to an API, it checks the requests. If the requests are allowed, data will be returned. Proper responses are also returned to let us know the result of our requests.
@@ -2179,8 +2086,34 @@ Angular - Route Parameters
 
 
 
-Observable and Rxjs
+What is RESTful API
 -------------------
+	An architectural style called REST (Representational State Transfer) advocates that web applications should use HTTP as it was originally envisioned. Lookups should use GET requests. PUT, POST, and DELETE requests should be used for mutation, creation, and deletion respectively.
+
+
+Angular - Http get()
+----------------------
+
+	the HTTP service will send a request to the server, now the request is going to hit a web service or a Web APi,	which will fetch the data from a database and send it back as an HTTP response and the responcse we get form the HTTP service is called an observable.
+
+	map operator
+	------------
+	the map operator that can be used to convert data to the desired fromat 
+
+	catch operator
+	--------------
+	we can also have a catch operator that works on an observable and that is used to handle exceptions
+
+
+Observable and Subscribe
+------------------------
+
+	- Observable belogs to RxJS library. Observables are used for better support of event handling, asynchronous programming, and handling multiple values. When we send and receive data over HTTP we need to deal it asynchronously because fetching data over HTTP may take time. Observable is subscribed by using async pipe or by using subscribe method
+
+	- Some methods of Observable class are subscribe, map, mergeMap, switchMap, debounceTime, of, retry, catch, throw ....etc.
+
+
+
 	Step-1) Make 'HTTP' get call from EmpService
 
 	Step-2)Receive the observable and map it (to JSON Format)
@@ -2296,6 +2229,50 @@ Observable and Rxjs
 
 
 
+Angular - Http Error Handling
+-------------------------------
+
+	catch operator
+	--------------
+	we can also have a catch operator that works on an observable and that is used to handle exceptions
+
+
+		add catch operater
+
+			import 'rxjs/add/operator/catch';
+
+
+
+	Exapmle
+	-------
+		import { Injectable } from '@angular/core';
+		import {Http, Response } from '@angular.http';
+
+		import 'rxjs/add/operator/map';
+		import 'rxjs/add/operator/catch';
+
+		@Injectable()
+
+		export class dataService{
+
+			private _url:string = "apiDatabase/data.json";
+
+			constructor(private _http:Http){}
+
+			myService(){
+				return this._http.get(this._url)
+					.map((dataResponse:Response)=> dataResponse.json())
+					.catch(_errorHandler);
+			}
+
+			_errorHandler(error:Response){
+				console.error(error);				
+			}
+
+		}
+
+
+
 
 
 Angular Services
@@ -2363,6 +2340,7 @@ Angular Services
 
 
 
+
 Angular - Promise vs Observable
 -------------------------------
 
@@ -2404,7 +2382,6 @@ HTTP, Observable and Rxjs
 
 
 
-
 CanActivate and CanActivateChild
 --------------------------------
 
@@ -2420,6 +2397,7 @@ CanActivate and CanActivateChild
 
 
 
+
 Explain Authentication and Authorization.
 -----------------------------------------
 	- Authentication: The user login credentials are passed to an authenticate API (on the server). On the server side validation of the credentials happens and a JSON Web Token (JWT) is returned. JWT is a JSON object that has some information or attributes about the current user.  Once the JWT is given to the client, the client or the user will be identified with that JWT.
@@ -2428,8 +2406,37 @@ Explain Authentication and Authorization.
 
 
 
-lazy loading in Angular
------------------------
+Differences between Angular components vs. directives.
+--------------------------------------------------------
+
+	1. a component is a directive with a view whereas a directive is a decorator with no view. Components are the specific type of directive that allows us to utilize web component functionality throughout our application. Whereas, Directive is the mechanism by which we attach behavior to elements.
+
+	2. A component is used to break up the application into smaller components. Whereas, Directive is used to design the re-usable components.
+
+	3. Components can be used to define pipes. Whereas, We cannot define pipes using directives.
+
+	4. Components can be present per DOM element. Whereas, Directive is used to add behavior to an existing DOM element	
+
+
+differences between ActivatedRoute and RouterState
+--------------------------------------------------
+	1. ActivatedRoute consists of the information about a route associated with a component loaded in an outlet. Whereas, RouterState represents the state in which the writer actually is.
+
+	2. We need ActivatedRouteSnapchat to traverse all the activated routes. Whereas, during a navigation, after redirects have been applied, the router creates a RouterStateSnapshot.
+
+	3. ActivatedRouteSnapshot has old data. When route changes, ActivateRouteSnapshot has data from previous route. Whereas, the RouterState cares about application components, or, to be more specific, about their arrangements.	
+
+
+
+What would you have in a shared module in Angular?
+--------------------------------------------------
+	Shared module is used to import the services in both eager and lazy loaded module. 
+
+	We all know that lazy loaded modules create their own branch on the dependency injection tree. Shared module consists of the services that are registered by the angular in the root app injector. For this, we need not import it in the lazy module because lazy loaded modules already have access to the services defined at the root. Components, pipes and directives are also defined in the shared module. Other modules that import the shared module can use it in their templates. This means that the modules can be imported normally in the lazy loaded module. The shared module contains the code that will be used across the applications and featured modules. It also consists of the common template components. “Dumb components” should also be present in the shared module. It typically consists of some common angular modules too. When you are importing the shared module, you will also need to import the module with its providers, because there is no app module in the test.
+
+
+Explain the concept of lazy loading in Angular.
+----------------------------------------------
 
 	- Lazy loading is a module which is used to decrease the start-up time. 
 
@@ -2473,10 +2480,21 @@ lazy loading in Angular
 
 
 
+Difference between constructor and ngOnlnit in Angular?
+-------------------------------------------------------
+
+	1. ngonInit is just a method in a class which structurally is not different to any other method in a class. Whereas, a constructor is a completely different thing. It will be called when an instance of a class is created.
+
+	2. A class constructor in angular is used to inject dependencies, which is called constructor injection pattern. Whereas, when ngOnInit is called, it has finished creating a component DOM, injected all required dependencies through constructor and processed input bindings.
+
+	3. A constructor is a default method of the class that is executed when the class is instantiated. Whereas, ngOnInit is a life cycle hook called by Angular 2 to indicate that angular is done creating the component.
+
+	4. ngOnInit relies on the binding of the component. Whereas, it is not the case when a constructor is used.
 
 
-Angular Lifecycle Hooks
------------------------
+
+What is the sequence of Angular Lifecycle Hooks?
+------------------------------------------------
 	OnChange()  -  OnInit()  -  DoCheck()  -  AfterContentInit()  -  AfterContentChecked()  -  AfterViewInit()  -  AfterViewChecked()  -  OnDestroy()
 
 
@@ -2490,37 +2508,98 @@ Angular Lifecycle Hooks
 		4. DoCheck
 
 
-		ngOnChanges: 
-		-----------
-			Responds when angular (re)sets its data-bound property which receives the current and previous object values.
 
-		ngOnInit: 
-		--------
-			Initializes the component/directive after first ngOnChange triggers. This is most frequently used method to retrieve the data for the template from a back-end service.
-		
-		ngDoCheck: 
-		----------
-			Detect and act upon changes occuring outside Angular context. It is called when every change detection run.
-		
-		ngOnDestroy: 
-		------------
-			Cleanup just before Angular destroys the directive/component. Unsubscribe observables and detach event handlers to avoid memory leaks.
-		
+What are Event emitters?
+------------------------
+	An Event emitter is a class defined in core module that can be used by components and directives to emit custom events.
 
-		Component-specific hooks:
 
-			ngAfterContentInit: 
-			-------------------
-				Component content has been initialized
+How to cache an observable data in Angular
+------------------------------------------
+	- Caching of an observable data is done with the help of "observable.cache". 
 
-			ngAfterContentChecked: 
-			---------------------
-				After Angular checks the bindings of the external content that it projected     into its view.
+	- We can use caching in order to cache the response in the memory and then, on the next subscription, instead of requesting the remote server again. 
 
-			ngAfterViewInit: 
-			----------------
-				After Angular creates the component’s view.
+	- This operator is used at the end of the string. Caching is important for the performance, especially on bandwidth restricted devices and slow networks. 
 
-			ngAfterViewChecked: 
-			-------------------
-				After Angular checks the bindings of the component’s view.
+	- You should have a good understanding of caching while working with promises but while translating it to observable, it is a bit difficult. Therefore, when interacting with observables, we typically set up a subscription on the consumer side and react to values coming through the pipe. 
+
+	- We can easily add caching to the observables by adding publishReplay(1) and refCount.
+
+
+
+
+Write the CLI command to generate 
+---------------------------------
+	- ng generate component [name]
+
+	- ng generate class [name]
+
+	- ng generate directive [name]
+
+	- ng generate service [name]
+
+	- ng generate enum [name]
+
+	- ng generate guard [name]
+
+	- ng generate module [name]
+
+	- ng generate pipe [name]
+
+	- ng generate interface [name] <type>
+
+
+
+How to run Angular application locally during development?
+-----------------------------------------------------------
+
+	- "ng serve" command is used to run Angular5 application locally during development.
+
+	- To start development server on specific port "ng serve --port aPortNumber" command is used.
+
+
+
+
+What’s new in Angular 5?
+------------------------
+	Certain tools are optimized in the new version of Angular, let us see what the tools are:
+
+	Angular 5 supports Typescript version 2.4
+
+	Angular 5 supports RxJS 5.5 which has new features like Pipeable Operators
+
+	A build tool to make the js bundles (files) lighter
+
+	Ahead of Time (AOT) is updated to be on by default
+
+	Events like ActivationStart and ActivationEnd are introduced in Router
+
+
+
+
+What is Transpiling in Angular?
+-------------------------------
+	Transpiling is the process of converting the typescript into javascript (using Traceur, a JS compiler). 
+
+	Though typescript is used to write code in the Angular applications, the code is internally transpiled into javascript. 
+
+
+What is ng-content Directive ?
+------------------------------ 
+	The HTML elements like p (paragraph) or h1 (heading) have some content between the tags. 
+
+	For example, <p>this is a paragraph</p> and <h1>this is a heading</h1>. 
+
+	Now, similar to this, what if we want to have some custom text or content between the angular tags like  <app-tax> some tax-related content </app-tax> This will not work the way it worked for HTML elements.  
+
+	Now, in such cases, the <ng-content> tag directive is used.
+
+
+
+What is AOT Compilation?
+------------------------
+	Every angular application gets compiled internally. The angular compiler takes javascript code, compiles it and produces javascript code again. Ahead-of-Time Compilation does not happen every time or for every user, as is the case with Just-In-Time (JIT) Compilation.
+
+
+
